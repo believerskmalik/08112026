@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎁 Her Birthday Surprise — Complete
 
 A cinematic, romantic birthday experience with animated tree, gift gallery, and heartfelt closing message.
@@ -228,3 +229,6 @@ The tree animation represents growth and beauty. The falling roses are romance i
 
 For detailed setup, see `SETUP_GUIDE.md`  
 For design philosophy, see `DESIGN_PLAN.md`
+=======
+# 08112026
+>>>>>>> origin/main
