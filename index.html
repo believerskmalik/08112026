@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love</title>
+    <link type="text/css" rel="stylesheet" href="file/default.css?v=2">
+    <link type="text/css" rel="stylesheet" href="file/animations.css?v=2">
+    <link type="text/css" rel="stylesheet" href="file/styles.css?v=2">
+    <link type="text/css" rel="stylesheet" href="file/polish.css?v=2">
+    <script type="text/javascript" src="file/jquery.min.js"></script>
+    <script type="text/javascript" src="file/jscex.min.js"></script>
+    <script type="text/javascript" src="file/jscex-parser.js"></script>
+    <script type="text/javascript" src="file/jscex-jit.js"></script>
+    <script type="text/javascript" src="file/jscex-builderbase.min.js"></script>
+    <script type="text/javascript" src="file/jscex-async.min.js"></script>
+    <script type="text/javascript" src="file/jscex-async-powerpack.min.js"></script>
+    <script type="text/javascript" src="file/function.js?v=2" charset="utf-8"></script>
+    <script type="text/javascript" src="file/love.js" charset="utf-8"></script>
+    <script type="text/javascript" src="file/gallery.js?v=2" charset="utf-8"></script>
+    <script>
+        function playAudio() {
+            var audio = document.getElementById("myAudio");
+            if (!audio) return;
+            var playback = audio.play();
+            if (playback && typeof playback.catch === "function") {
+                playback.catch(function(error) {
+                    console.info("Audio playback was prevented by the browser:", error);
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Falling Roses Background -->
+    <div class="rose-container" id="rose-container"></div>
+    <div id="main">
+        <div id="error"><a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a> (<a href="http://firefox.com.cn/download/">Firefox</a>)</div>
+        <audio autoplay="autoplay" height="100" width="100" id="myAudio">
+            <source src="aud.mp3" type="audio/mp3" />
+            <embed height="100" width="100" src="aud.mp3" />
+        </audio>
+
+        <!-- Tree Animation Section -->
+        <div id="wrap">
+            <div id="text">
+                <div id="code">
+                    <span class="say">Hey Bangaram! 💞</span><br>
+                    <span class="say">Happiest Birthday, Raa! 🎂🎈</span><br>
+                    <span class="say">May Allah bless you with endless happiness, good health, and beautiful moments. 🤲💕</span><br>
+                    <span class="say">May all your dreams come true, and may your smile never fade. ✨</span><br>
+                    <span class="say">Just saying... you're becoming more beautiful and amazing with every passing day. ❤️</span><br>
+                    <span class="say">You know what? This little tree is filled with all my love for you, Bangaram. 🌳💗</span><br>
+                    <span class="say">And just like this tree keeps growing, my love for you will keep growing too — never fading, never becoming less. 🥹❤️</span><br>
+                    <span class="say">No matter how many seasons pass, I hope our little tree keeps growing with beautiful memories and endless love. 🌸</span><br>
+                    <span class="say">I hope your special day is as beautiful as your heart.</span><br>
+                    <span class="say">Keep smiling, keep shining, and always stay the precious girl you are. 🫶</span><br>
+                    <span class="say">Once again, Happy Birthday, my Bangaram! ❤️😘</span>
+                </div>
+            </div>
+            <div id="clock-box">
+                <span id="clock">577 days 0 hours 0 minutes 0 seconds</span>
+            </div>
+            <canvas id="canvas" width="1100" height="680" role="button" tabindex="0" aria-label="Start the birthday tree animation"></canvas>
+        </div>
+
+        <!-- Gift Button Section - Gift Box Visual -->
+        <div class="gift-section">
+            <div class="gift-box-container">
+                <div class="gift-box">
+                    <div class="gift-box-top"></div>
+                    <div class="gift-box-body">
+                        <div class="gift-ribbon-vertical"></div>
+                        <div class="gift-ribbon-horizontal"></div>
+                        <div class="gift-bow"></div>
+                    </div>
+                </div>
+                <div class="gift-text">
+                    <h2>A Thousand Reasons Why</h2>
+                    <p>You're everything to me</p>
+                    <div class="button-group">
+                        <button id="open-images-btn" class="gift-button">Open Pics</button>
+                        <button id="open-videos-btn" class="gift-button">Open Videos</button>
+                    </div>
+                    <div class="letter-button-wrapper">
+                        <button id="open-closing-btn" class="gift-button-large">💌 Read My Heartfull Letter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Modal - Fullscreen Slideshow -->
+        <div id="gallery-modal" class="gallery-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Photo slideshow">
+            <div class="gallery-modal-content">
+                <!-- Slideshow Container (NO HEADER) -->
+                <div class="slideshow-container">
+                    <div class="slide-wrapper">
+                        <img id="slide-image" class="slide-image" src="" alt="Memory">
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <button id="prev-btn" class="slide-nav-btn prev-btn" title="Previous (← arrow)" aria-label="Previous photo">
+                        <span>‹</span>
+                    </button>
+                    <button id="next-btn" class="slide-nav-btn next-btn" title="Next (→ arrow)" aria-label="Next photo">
+                        <span>›</span>
+                    </button>
+                </div>
+
+                <!-- Slide Counter -->
+                <div class="slide-counter-wrapper">
+                    <span id="slide-counter" class="slide-counter">1 / 7</span>
+                </div>
+
+                <!-- Close Button -->
+                <div class="slideshow-footer">
+                    <button id="download-btn" class="footer-btn download-btn" title="Download image">
+                        <span>⬇ Download</span>
+                    </button>
+                    <button id="close-slideshow-btn" class="footer-btn close-btn" title="Close slideshow">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Player Modal -->
+        <div id="video-modal" class="video-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Video player">
+            <div class="video-modal-content">
+                <div class="video-player">
+                    <video id="video-element" controls>
+                        <source src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+                    <!-- Navigation Buttons -->
+                    <button id="prev-video-btn" class="video-nav-btn prev-video-btn" title="Previous video" aria-label="Previous video">
+                        <span>‹</span>
+                    </button>
+                    <button id="next-video-btn" class="video-nav-btn next-video-btn" title="Next video" aria-label="Next video">
+                        <span>›</span>
+                    </button>
+                </div>
+
+                <!-- Video Counter -->
+                <div class="video-counter-wrapper">
+                    <span id="video-counter" class="video-counter">1 / 1</span>
+                </div>
+
+                <!-- Close Button -->
+                <div class="video-footer">
+                    <button id="download-video-btn" class="video-close-btn" title="Download video" style="margin-right: 10px;">
+                        <span>⬇ Download</span>
+                    </button>
+                    <button id="close-video-btn" class="video-close-btn">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Love Letter Modal -->
+        <div id="letter-modal" class="letter-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Love letter">
+            <div class="letter-modal-content">
+                <button id="close-letter-btn" class="letter-close-btn" title="Close letter" aria-label="Close letter">✕</button>
+
+                <div class="letter-container">
+                    <div class="letter-header">
+                        <div class="letter-decoration">✦</div>
+                        <h1 class="letter-title">A Letter From My Heart</h1>
+                        <div class="letter-decoration">✦</div>
+                    </div>
+
+                    <div class="letter-content">
+                        <p>Hey Bangaram! ❤️🥹</p>
+
+<p>First of all, Happiest Birthday, Raa! 🎂💞</p>
+
+<p>May Allah bless you with endless happiness, good health, peace, and countless beautiful moments. May He protect you always, guide you towards everything good, and fill your life with His mercy and blessings. May Allah accept all your duas and make every beautiful dream of yours come true. Ameen. 🤲❤️</p>
+
+<p>Bangaram, I don't know how perfectly I can express everything in my heart through these few words, but I genuinely want you to understand how much you mean to me.</p>
+
+<p>Just saying... you're becoming more and more beautiful, pretty, and amazing with every passing day. ❤️ Sometimes, when I think about you, I feel so lucky to have someone like you in my life. You are not just someone I love; you are the person with whom I dream of building my entire future.</p>
+
+<p>And look at this little tree, Bangaram... 🌳❤️</p>
+
+<p>This tree is filled with my love for you. Every leaf represents a little piece of my affection, every branch carries my feelings, and every part of it reminds me of the love I have for you.</p>
+
+<p>You know, a tree doesn't grow beautifully in just one day. It needs time, patience, care, and strength to survive every season. Sometimes it faces strong winds, heavy rain, and difficult weather, but it keeps standing and growing.</p>
+
+<p>That's exactly how I imagine our love.</p>
+
+<p>Just like this tree, I want our love to keep growing with time. Even when life becomes difficult, even when we face problems, and even when things don't go according to our plans, I don't want our love to become less. I want us to stand strong, understand each other, and keep growing together.</p>
+
+<p>This tree may become bigger with every passing day, but I promise you one thing: my love and commitment towards you will never intentionally become less. ❤️🌳</p>
+
+<p class="letter-highlight"><strong>And Bangaram, there is something very important I want to promise you.</strong></p>
+
+<p>I will definitely marry you, Insha Allah. Whatever situations come into our lives, whatever difficulties we face, and whatever problems stand in front of us, I will do my best to overcome them and make our dream of being together a reality.</p>
+
+<p>I am giving you this promise from the bottom of my heart. I don't want you to think of my love as just beautiful words or temporary feelings. I want my actions, my efforts, my patience, and my commitment to prove how serious I am about our future.</p>
+
+<p>I am working hard for two people who mean everything to me in this world — <strong>you and my mom.</strong> ❤️</p>
+
+<p>My biggest dream is to become settled, build a beautiful life, and give both of you the happiness and comfort you deserve. Every effort I make, every difficulty I try to overcome, and every step I take towards becoming successful has a reason behind it.</p>
+
+<p>That reason is our future.</p>
+
+<p>I know life is not always easy. There will be responsibilities, financial struggles, unexpected problems, and difficult situations. But I am ready to work hard, face those challenges, and keep moving forward for the beautiful life I dream of sharing with you and my mom.</p>
+
+<p>I don't want to simply dream about a happy future. I want to work for it, struggle for it, and make it happen, Insha Allah.</p>
+
+<p>And one thing I want you to know very clearly, Bangaram...</p>
+
+<p class="letter-highlight"><strong>In my life, there is no place for another girl except you.</strong> My heart has chosen you, and my intention is to build my future with you. I want my love, loyalty, and commitment to remain sincere. I don't want anyone else to take the place that belongs to you in my life. ❤️</p>
+
+<p>There is another beautiful dream I carry in my heart about my future wife.</p>
+
+<p>I strongly believe that, Insha Allah, you and I can build the kind of Islamic family I have always dreamed of. I want our life to be guided by the teachings of Islam and the boundaries of Shariah. I want us to read the Holy Quran, understand its meaning, learn and perform our Namaz regularly, and encourage each other to become better Muslims.</p>
+
+<p>I don't expect either of us to become perfect overnight. We can learn, improve, correct our mistakes, and grow together with patience. I want us to remind each other about Allah, support each other in practising our Deen, and make our home a place where Islam is valued and practised with love.</p>
+
+<p>I don't just dream of having a beautiful house or a comfortable lifestyle. I dream of having a life filled with <strong>Halal rizq, Allah's blessings, Barkath, peace, and strong Imaan.</strong></p>
+
+<p>I want whatever we earn to be Halal. I want whatever we build to have Barkath. I want our decisions to follow the right path. Most importantly, I want Allah to be at the centre of our lives.</p>
+
+<p>I believe we can work towards this beautiful dream together, Raa. You and I, supporting each other, learning together, correcting each other with love, and asking Allah to guide us throughout our journey.</p>
+
+<p class="letter-highlight"><strong>We will make this dream a reality, Insha Allah.</strong> 🤲❤️</p>
+
+<p>Bangaram, I know I cannot predict everything that will happen in our future. But I can tell you what I genuinely want: I want to choose you, respect you, stand beside you, work hard for our future, and build a life with you based on love, loyalty, understanding, and Islam.</p>
+
+<p>Whenever I look at this little tree, I want you to remember these words. Its growth is my little symbol of the future I dream about with you. No matter how many seasons pass, I want it to keep growing, just as I want our love and commitment to keep growing.</p>
+
+<p>Once again, Happiest Birthday, my Bangaram! 🎂💗</p>
+
+<p>May Allah bless you today, tomorrow, and throughout your life. May He keep you safe, bless your heart with happiness, and guide both of us towards the beautiful future we dream of.</p>
+
+<p>I am working for that future. I am praying for that future. And I sincerely hope that one day we will look back at all these dreams and smile because, by Allah's grace, we made them come true.</p>
+
+<p class="letter-highlight"><strong>You, me, our dreams, our Deen, and a life full of Halal and Barkath — that's the beautiful future I am working towards.</strong></p>
+
+<p class="letter-highlight"><strong>Insha Allah, one day, all these dreams will become our reality.</strong> ❤️🌳🤲</p>
+
+<p class="letter-signature">With all my love,<br>Your's Pyari Habibi...❤️</p>
+                    </div>
+
+                    <div class="letter-footer">
+                        <div class="letter-decoration">✦</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Closing Modal -->
+        <div id="closing-modal" class="closing-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Birthday message">
+            <div class="closing-modal-content">
+                <div class="closing-message">
+                    <h1>You Are My Everything</h1>
+                    <p>Every moment with you is a gift.</p>
+                    <p>You make my life complete.</p>
+                    <p>Happy Birthday, my love. 🎂</p>
+                    <div class="heart-emoji">💕</div>
+                    <p style="font-style: italic; margin-top: 30px;">
+                        "You are my life and everything. My love. Always."
+                    </p>
+                </div>
+                <div class="closing-action">
+                    <button class="open-letter-btn" id="open-letter-btn">💌 Read My Letter</button>
+                    <button class="restart-btn" id="restart-btn">Start Over</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var canvas = $('#canvas');
+		
+        if (!canvas[0].getContext) {
+            $("#error").show();
+            return false;
+        }
+
+        // Keep the drawing coordinate system fixed; CSS scales the canvas responsively.
+        var width = canvas[0].width;
+        var height = canvas[0].height;
+        canvas.attr("width", width);
+        canvas.attr("height", height);
+
+        var opts = {
+            seed: {
+                x: width / 2 - 20,
+                color: "rgb(190, 26, 37)",
+                scale: 2
+            },
+            branch: [
+                [535, 680, 570, 250, 500, 200, 30, 100, [
+                    [540, 500, 455, 417, 340, 400, 13, 100, [
+                        [450, 435, 434, 430, 394, 395, 2, 40]
+                    ]],
+                    [550, 445, 600, 356, 680, 345, 12, 100, [
+                        [578, 400, 648, 409, 661, 426, 3, 80]
+                    ]],
+                    [539, 281, 537, 248, 534, 217, 3, 40],
+                    [546, 397, 413, 247, 328, 244, 9, 80, [
+                        [427, 286, 383, 253, 371, 205, 2, 40],
+                        [498, 345, 435, 315, 395, 330, 4, 60]
+                    ]],
+                    [546, 357, 608, 252, 678, 221, 6, 100, [
+                        [590, 293, 646, 277, 648, 271, 2, 80]
+                    ]]
+                ]] 
+            ],
+            bloom: {
+                num: 700,
+                width: 1080,
+                height: 650,
+            },
+            footer: {
+                width: 1200,
+                height: 5,
+                speed: 10,
+            }
+        }
+
+        var tree = new Tree(canvas[0], width, height, opts);
+        var seed = tree.seed;
+        var foot = tree.footer;
+        var hold = 1;
+
+        function getCanvasPoint(e) {
+            var rect = canvas[0].getBoundingClientRect();
+            return {
+                x: (e.clientX - rect.left) * (width / rect.width),
+                y: (e.clientY - rect.top) * (height / rect.height)
+            };
+        }
+
+        function startTreeAnimation() {
+            if (!hold) return;
+            playAudio();
+            hold = 0;
+            canvas.unbind('click').unbind('mousemove').unbind('keydown');
+            canvas.removeClass('hand');
+            canvas.attr('role', 'img').attr('aria-label', 'Birthday tree animation');
+            canvas.removeAttr('tabindex');
+        }
+
+        canvas.click(function(e) {
+            var point = getCanvasPoint(e);
+            if (seed.hover(point.x, point.y)) startTreeAnimation();
+        }).mousemove(function(e) {
+            var point = getCanvasPoint(e);
+            canvas.toggleClass('hand', seed.hover(point.x, point.y));
+        }).on('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
+                event.preventDefault();
+                startTreeAnimation();
+            }
+        });
+
+        var seedAnimate = eval(Jscex.compile("async", function () {
+            seed.draw();
+            while (hold) {
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canScale()) {
+                seed.scale(0.95);
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canMove()) {
+                seed.move(0, 2);
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+        }));
+
+        var growAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.grow();
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canGrow());
+        }));
+
+        var flowAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.flower(2);
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canFlower());
+        }));
+
+        var moveAnimate = eval(Jscex.compile("async", function () {
+            tree.snapshot("p1", 240, 0, 610, 680);
+            while (tree.move("p1", 500, 0)) {
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+            foot.draw();
+            tree.snapshot("p2", 500, 0, 610, 680);
+
+            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+            canvas.css("background", "linear-gradient(135deg, #2d1a3d 0%, #1f1a3a 50%, #2a1a3f 100%)");
+            $await(Jscex.Async.sleep(300));
+            canvas.css("background", "linear-gradient(135deg, #2d1a3d 0%, #1f1a3a 50%, #2a1a3f 100%)");
+        }));
+
+        var textAnimate = eval(Jscex.compile("async", function () {
+            $("#text").addClass("is-active");
+            $("#code").show().typewriter();
+        }));
+	    
+        var runAsync = eval(Jscex.compile("async", function () {
+            $await(seedAnimate());
+            $await(growAnimate());
+            $await(flowAnimate());
+            $await(moveAnimate());
+            textAnimate().start();
+        }));
+
+        runAsync().start();
+    })();
+    </script>
+
+    <!-- Rose Background Generator & Gallery Image Loader -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ===== FLOATING HEARTS GENERATOR =====
+        function createHeart() {
+            return '<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" class="heart-svg">' +
+                '<defs>' +
+                  '<filter id="heart-shadow">' +
+                    '<feDropShadow dx="1" dy="1" stdDeviation="1" flood-opacity="0.3"/>' +
+                  '</filter>' +
+                '</defs>' +
+                '<g filter="url(#heart-shadow)">' +
+                  '<path d="M20,35 C5,25 2,18 2,12 C2,6.5 6,3 10,3 C14,3 17,5 20,8 C23,5 26,3 30,3 C34,3 38,6.5 38,12 C38,18 35,25 20,35 Z" fill="#C41E3A" opacity="0.85"/>' +
+                  '<path d="M20,32 C7,23 4,17 4,12 C4,7 7,4 11,4 C15,4 17,6 20,9 C23,6 25,4 29,4 C33,4 36,7 36,12 C36,17 33,23 20,32 Z" fill="#FF1493" opacity="0.6"/>' +
+                '</g>' +
+              '</svg>';
+        }
+
+        // Populate full background with floating hearts
+        function generateFloatingHearts() {
+            var container = document.getElementById('rose-container');
+            if (!container) return;
+
+            // Keep ambient motion light, especially on smaller devices.
+            var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
+            var heartCount = window.innerWidth < 600 ? 12 : 26;
+            for (var i = 0; i < heartCount; i++) {
+                var heart = document.createElement('div');
+                heart.className = 'floating-heart';
+
+                // Random horizontal position (0% to 100% across entire width)
+                var randomLeft = Math.random() * 100;
+                heart.style.left = randomLeft + '%';
+
+                // Random vertical starting position (top to bottom)
+                var randomTop = Math.random() * 100;
+                heart.style.top = randomTop + '%';
+
+                // Random animation delay for varied effect (start immediately)
+                var randomDelay = Math.random() * 2;
+                heart.style.animationDelay = randomDelay + 's';
+
+                // Random animation duration for varied speeds (faster)
+                var randomDuration = 12 + Math.random() * 8; // 12-20 seconds
+                heart.style.animationDuration = randomDuration + 's';
+
+                heart.innerHTML = createHeart();
+                container.appendChild(heart);
+            }
+        }
+
+        // ===== MEDIA DISCOVERY HELPERS =====
+        function selectPreferredMedia(results) {
+            var selectedByIndex = {};
+            results.forEach(function(result) {
+                if (!result) return;
+                var current = selectedByIndex[result.index];
+                if (!current || result.extensionIndex < current.extensionIndex) {
+                    selectedByIndex[result.index] = result;
+                }
+            });
+
+            return Object.keys(selectedByIndex)
+                .map(function(index) { return selectedByIndex[index]; })
+                .sort(function(a, b) { return a.index - b.index; });
+        }
+
+        // ===== GALLERY IMAGE LOADER FOR SLIDESHOW =====
+        function probeImageFormat(index, extensions, extensionIndex) {
+            if (extensionIndex >= extensions.length) return Promise.resolve(null);
+            var num = String(index).padStart(2, '0');
+            var imagePath = 'images/' + num + '.' + extensions[extensionIndex];
+            return new Promise(function(resolve) {
+                var testImg = new Image();
+                testImg.onload = function() {
+                    resolve({ index: index, extensionIndex: extensionIndex, path: imagePath });
+                };
+                testImg.onerror = function() { resolve(null); };
+                testImg.src = imagePath;
+            }).then(function(result) {
+                return result || probeImageFormat(index, extensions, extensionIndex + 1);
+            });
+        }
+
+        function loadGalleryImages() {
+            var extensions = ['jpg', 'jpeg', 'png', 'webp'];
+            var maxImages = 20;
+            var probes = [];
+
+            for (var i = 1; i <= maxImages; i++) {
+                probes.push(probeImageFormat(i, extensions, 0));
+            }
+
+            Promise.all(probes).then(function(results) {
+                var allLoadedImages = selectPreferredMedia(results).map(function(item) { return item.path; });
+                if (allLoadedImages.length > 0) {
+                    if (window.setAllImages) window.setAllImages(allLoadedImages);
+                    var slideCounter = document.getElementById('slide-counter');
+                    if (slideCounter) slideCounter.textContent = '1 / ' + allLoadedImages.length;
+                    return;
+                }
+
+                var slideImage = document.getElementById('slide-image');
+                if (slideImage) slideImage.style.display = 'none';
+                var prevBtn = document.getElementById('prev-btn');
+                var nextBtn = document.getElementById('next-btn');
+                if (prevBtn) prevBtn.style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'none';
+
+                var slideWrapper = document.querySelector('.slide-wrapper');
+                if (slideWrapper) {
+                    slideWrapper.innerHTML = '<div style="text-align: center; padding: 60px 40px; color: #D4AF9F; font-family: \'Georgia\', serif;">' +
+                        '<p style="font-size: 18px; margin: 0 0 10px 0;">📁 No images found</p>' +
+                        '<p style="font-size: 14px; margin: 0 0 15px 0; color: #E8D4D0;">Create an <strong>/images/</strong> folder and add photos:</p>' +
+                        '<p style="font-size: 12px; margin: 0; color: #E8D4D0; font-family: monospace;">01.jpg, 02.jpg, 03.jpg, etc.</p>' +
+                        '</div>';
+                }
+            }).catch(function(error) {
+                console.error('Image discovery failed:', error);
+            });
+        }
+
+        // ===== GALLERY VIDEO LOADER FOR VIDEO PLAYER =====
+        function probeVideoMetadata(videoPath, index, extensionIndex) {
+            return new Promise(function(resolve) {
+                var testVideo = document.createElement('video');
+                var settled = false;
+                var fallbackTimer = window.setTimeout(function() { finish(null); }, 12000);
+
+                function finish(result) {
+                    if (settled) return;
+                    settled = true;
+                    window.clearTimeout(fallbackTimer);
+                    testVideo.onloadedmetadata = null;
+                    testVideo.onerror = null;
+                    testVideo.removeAttribute('src');
+                    testVideo.load();
+                    resolve(result);
+                }
+
+                testVideo.preload = 'metadata';
+                testVideo.muted = true;
+                testVideo.playsInline = true;
+                testVideo.onloadedmetadata = function() {
+                    finish({ index: index, extensionIndex: extensionIndex, path: videoPath });
+                };
+                testVideo.onerror = function() { finish(null); };
+                testVideo.src = videoPath;
+                testVideo.load();
+            });
+        }
+
+        function probeFirstAvailableVideo(index, extensions, extensionIndex) {
+            if (extensionIndex >= extensions.length) return Promise.resolve(null);
+            var num = String(index).padStart(2, '0');
+            var videoPath = 'videos/' + num + '.' + extensions[extensionIndex];
+            return probeVideoMetadata(videoPath, index, extensionIndex).then(function(result) {
+                return result || probeFirstAvailableVideo(index, extensions, extensionIndex + 1);
+            });
+        }
+
+        function loadGalleryVideos() {
+            var extensions = ['mp4', 'webm', 'mov'];
+            var maxVideos = 20;
+            var probes = [];
+
+            for (var i = 1; i <= maxVideos; i++) {
+                probes.push(probeFirstAvailableVideo(i, extensions, 0));
+            }
+
+            Promise.all(probes).then(function(results) {
+                var allLoadedVideos = selectPreferredMedia(results).map(function(item) { return item.path; });
+                if (allLoadedVideos.length > 0) {
+                    if (window.setAllVideos) window.setAllVideos(allLoadedVideos);
+                    var videoCounter = document.getElementById('video-counter');
+                    if (videoCounter) videoCounter.textContent = '1 / ' + allLoadedVideos.length;
+                    return;
+                }
+
+                var videoPlayer = document.querySelector('.video-player');
+                if (videoPlayer) {
+                    var videoElement = document.getElementById('video-element');
+                    if (videoElement) videoElement.style.display = 'none';
+                    var prevVideoBtn = document.getElementById('prev-video-btn');
+                    var nextVideoBtn = document.getElementById('next-video-btn');
+                    if (prevVideoBtn) prevVideoBtn.style.display = 'none';
+                    if (nextVideoBtn) nextVideoBtn.style.display = 'none';
+
+                    videoPlayer.innerHTML = '<div style="text-align: center; padding: 60px 40px; color: #D4AF9F; font-family: \'Georgia\', serif; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">' +
+                        '<div>' +
+                        '<p style="font-size: 18px; margin: 0 0 10px 0;">🎬 No videos found</p>' +
+                        '<p style="font-size: 14px; margin: 0 0 15px 0; color: #E8D4D0;">Create a <strong>/videos/</strong> folder and add videos:</p>' +
+                        '<p style="font-size: 12px; margin: 0; color: #E8D4D0; font-family: monospace;">01.mp4, 02.mp4, 03.mp4, etc.</p>' +
+                        '</div>' +
+                        '</div>';
+                }
+            }).catch(function(error) {
+                console.error('Video discovery failed:', error);
+            });
+        }
+
+        // Initialize when DOM is ready
+        function initialize() {
+            generateFloatingHearts();
+            loadGalleryImages();
+            loadGalleryVideos();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize);
+        } else {
+            initialize();
+        }
+
+    })();
+    </script>
+</body>
+</html>
